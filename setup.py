@@ -10,8 +10,5 @@ setup(name='fnphat.cityweather',
     author_email = 'fnphat@gmail.com',
     url = 'https://github.com/fnphat/cityweather',
     packages=['fnphat', 'fnphat.cityweather'],
-    install_requires =  [
-                        'data-gc-ca-api >= 0.2.4',
-                        'arrow >= 0.6.0'
-                        ],
+    install_requires =  [x.strip() for x in open("reqs_pip.txt").readlines()],
 )      

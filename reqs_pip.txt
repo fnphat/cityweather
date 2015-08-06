@@ -1,2 +1,2 @@
-arrow==0.6.0
-data-gc-ca-api==0.2.4
+arrow>=0.6.0
+data-gc-ca-api>=0.2.4

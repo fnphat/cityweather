@@ -25,10 +25,11 @@ class CityWeather(object):
             return self.ec_city.get_quantity(metric)
         else:
             return None
-    
+
+    #Replacement function of data_gc_ca_api.cityweather.City.get_atrribute()
+    #Source: https://github.com/igable/data-gc-ca-api
     def _get_attribute(self, path, attribute):
         if self.ec_city is not None:
-            """Get the atribute of the element at XPath path"""
             element = self.ec_city.tree.find(path)
             if element is not None and element.attrib.has_key(attribute):
                 return element.attrib[attribute]

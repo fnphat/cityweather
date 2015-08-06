@@ -1,4 +1,5 @@
 import data_gc_ca_api.cityweather as _ec
+import arrow as _arrow
 
 class CityWeather(object):
     TIMESTAMP = 'currentConditions/dateTime/timeStamp'
@@ -40,16 +41,33 @@ class CityWeather(object):
         return self._get_metric(metric), self._get_attribute(metric, 'units')
 
     def timestamp(self):
-        return self._get_metric(self.TIMESTAMP)
+        #timestamp format: 20150806130000 = 2015-08-06 13:00:00 UTC
+        timestamp = self._get_metric(self.TIMESTAMP)
+        if timestamp is not None:
+            timestamp = _arrow.get(timestamp, 'YYYYMMDDHHmmss').to('local')
+        return timestamp
         
     def temperature(self):
-        return self._get_metric_and_units(self.TEMPERATURE)
+        temper, units = self._get_metric_and_units(self.TEMPERATURE)
+        if temper is not None:
+            temper = float(temper)
+        return temper, units
 
     def humidity(self):
-        return self._get_metric_and_units(self.HUMIDITY)
+        humidity, units = self._get_metric_and_units(self.HUMIDITY)
+        if humidity is not None:
+            humidity = int(humidity)
+        return humidity, units       
 
     def dew_point(self):
-        return self._get_metric_and_units(self.DEW_POINT)
+        dew_point, units = self._get_metric_and_units(self.DEW_POINT)
+        if dew_point is not None:
+            dew_point = float(dew_point)
+        return dew_point, units        
         
     def humidex(self):
-        return self._get_metric_and_units(self.HUMIDEX)
+        humidex, units = self._get_metric_and_units(self.HUMIDEX)
+        if humidex is not None:
+            humidex = int(humidex)
+        return humidex, units    
+
